@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model usuarios {
+  id             Int              @id @default(autoincrement())
+  nome           String?
+  cpf            String?
+  email          String?
+  senha          String?
+  telefone       String?
+  tipo           TipoUsuario
+  ordens_servico ordens_servico[]
+  manutencoes    manutencoes[]   @relation("Tecnico")
+}
+
+model hospitais {
+  id        Int       @id @default(autoincrement())
+  nome      String?
+  cnpj      String?
+  email     String?
+  senha     String?
+  telefone  String?
+  setores   setores[]
+}
+
+model setores {
+  id           Int           @id @default(autoincrement())
+  nome         String?
+  hospital_id  Int
+  hospital     hospitais     @relation(fields: [hospital_id], references: [id])
+  equipamentos equipamentos[]
+}
+
+model equipamentos {
+  id             Int              @id @default(autoincrement())
+  nome           String?
+  descricao      String?
+  numero_serie   String?
+  setor_id       Int?
+  setor          setores?         @relation(fields: [setor_id], references: [id])
+  ordens_servico ordens_servico[]
+}
+
+model ordens_servico {
+  id              Int             @id @default(autoincrement())
+  descricao       String?
+  status          Status          @default(aberta)
+  equipamento_id  Int
+  usuario_id      Int
+  data_abertura   DateTime        @default(now())
+  data_conclusao  DateTime?
+  equipamento     equipamentos    @relation(fields: [equipamento_id], references: [id])
+  usuario         usuarios        @relation(fields: [usuario_id], references: [id])
+  manutencoes     manutencoes[]
+}
+
+model manutencoes {
+  id              Int             @id @default(autoincrement())
+  descricao       String?
+  tipo            TipoManutencao
+  data            DateTime        @default(now())
+  ordemServicoId  Int
+  tecnicoId       Int
+  ordem_servico   ordens_servico  @relation(fields: [ordemServicoId], references: [id])
+  tecnico         usuarios        @relation("Tecnico", fields: [tecnicoId], references: [id])
+}
+
+enum TipoUsuario {
+  cliente
+  técnico
+  administrador
+}
+
+enum TipoManutencao {
+  preventiva
+  corretiva
+}
+
+enum Status {
+  aberta
+  em_andamento
+  concluída
+}
