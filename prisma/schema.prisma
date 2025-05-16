@@ -24,7 +24,6 @@ model hospitais {
   nome      String?
   cnpj      String?
   email     String?
-  senha     String?
   telefone  String?
   setores   setores[]
 }
@@ -39,7 +38,7 @@ model setores {
 
 model equipamentos {
   id             Int              @id @default(autoincrement())
-  nome           String?
+  nome           String
   descricao      String?
   numero_serie   String?
   setor_id       Int?
@@ -51,7 +50,7 @@ model ordens_servico {
   id              Int             @id @default(autoincrement())
   descricao       String?
   status          Status          @default(aberta)
-  equipamento_id  Int
+  equipamento_id  Int             
   usuario_id      Int
   data_abertura   DateTime        @default(now())
   data_conclusao  DateTime?
