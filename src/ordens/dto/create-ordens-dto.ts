@@ -9,7 +9,7 @@ export class CreateOrdensServicoDto {
 
   @IsOptional()
   @IsEnum(Status)
-  status?: Status;  // Tem default no Prisma, então pode ser opcional.
+  status?: Status;
 
   @IsNotEmpty()
   @IsInt()
@@ -21,7 +21,7 @@ export class CreateOrdensServicoDto {
 
   @IsOptional()
   @IsDateString()
-  data_abertura?: Date;  // Tem default now(), mas pode permitir sobrescrever.
+  data_abertura?: Date; 
 
   @IsOptional()
   @IsDateString()
