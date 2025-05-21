@@ -1,5 +1,4 @@
 import { IsEmail, IsNotEmpty, IsNumber, IsString, Length } from 'class-validator';
-import { identity } from 'rxjs';
 import { TipoUsuario } from '@prisma/client';
 import { ordens_servico } from '@prisma/client';
 import { manutencoes } from '@prisma/client';
