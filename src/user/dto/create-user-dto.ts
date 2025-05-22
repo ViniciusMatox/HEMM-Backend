@@ -27,12 +27,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   tipo : TipoUsuario;
 
-  @IsNotEmpty()
-  ordens_servico : ordens_servico[];
-
-  @IsNotEmpty()
-  manutencoes : manutencoes[];
-
 //   id             Int              @id @default(autoincrement())
 //   nome           String?
 //   cpf            String?
