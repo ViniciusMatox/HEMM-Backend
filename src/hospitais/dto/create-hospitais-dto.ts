@@ -11,7 +11,7 @@ import { setores, TipoUsuario } from '@prisma/client';
 //     setores   setores[]
 //   }
 
-export class CreateEquipamentoDto {
+export class CreateHospitaisDto {
 
   @IsString()
   @IsNotEmpty()
@@ -28,8 +28,6 @@ export class CreateEquipamentoDto {
   @MaxLength(9)
   telefone : string;
 
-  @IsNotEmpty()
-  setores : setores[];
 
 }
 
